@@ -1,22 +1,56 @@
 # Chat-GPT-Coding
 Used to re-create DS-3850 python coding projects using AI (ChatGPT 3.5)
 
-def mad_lib():
-    # Prompting user for inputs
-    adjective = input("Enter an adjective: ")
-    large_objects_plural = input("Enter a plural noun for large objects: ")
-    body_part = input("Enter a body part: ")
-    restaurant = input("Enter a restaurant name: ")
-    first_food = input("Enter a type of food (singular): ")
-    second_food = input("Enter another type of food (singular): ")
-    large_object_singular = input("Enter a singular noun for a large object: ")
+def run_quiz():
+    # Define the quiz questions and answers as a dictionary
+    quiz_questions = {
+        "What is the capital of France?": "Paris",
+        "True or False: The Earth is flat.": "False",
+        "What is the largest mammal?": ["A. Elephant", "B. Blue Whale", "C. Giraffe", "D. Lion"],
+        "What is the chemical symbol for water?": "H2O",
+        "Fill in the blank: The mitochondria is the _______ of the cell.": "powerhouse"
+    }
 
-    # Creating the MadLib story with user inputs
-    story = f"I’ve had a very {adjective} day. This morning, I dropped a box of {large_objects_plural} on my {body_part}. Then, at lunch, I went to {restaurant} for their delicious {first_food}, but the waiter brought me {second_food}, which I was not hungry for. Finally, on my way home, I was cut off by a van with a large {large_object_singular} strapped to the roof."
+    # Initialize counters for correct and incorrect answers
+    correct_count = 0
+    total_questions = len(quiz_questions)
 
-    # Displaying the completed MadLib story
-    print("\nHere's your MadLib story:\n")
-    print(story)
+    # Iterate through the questions and ask them one by one
+    for question, answer in quiz_questions.items():
+        print(question)
+        
+        # If it's a multiple choice question
+        if isinstance(answer, list):
+            for choice in answer:
+                print(choice)
+            user_answer = input("Enter the letter of your choice: ").upper()
+
+            # Check if the user's choice is valid
+            while user_answer not in ['A', 'B', 'C', 'D']:
+                print("Invalid choice. Please enter A, B, C, or D.")
+                user_answer = input("Enter the letter of your choice: ").upper()
+
+            user_answer_idx = ord(user_answer) - ord('A')  # Convert letter to index
+            user_answer = answer[user_answer_idx][3:]  # Get the choice text without the letter
+        else:
+            user_answer = input("Your answer: ")
+
+        # Check if the answer is correct
+        if isinstance(answer, list):
+            correct = user_answer.lower() == answer[1][3:].lower()  # Assuming the second choice is the correct one
+        else:
+            correct = user_answer.lower() == answer.lower()
+        
+        # Provide feedback on the answer
+        if correct:
+            print("Correct!\n")
+            correct_count += 1
+        else:
+            print(f"Incorrect. The correct answer is: {answer}\n")
+
+    # Display final results
+    print("Quiz completed! Thanks for playing.")
+    print(f"You got {correct_count} out of {total_questions} questions correct.")
 
 if __name__ == "__main__":
-    mad_lib()
+    run_quiz()
