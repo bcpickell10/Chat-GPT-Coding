@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Chat-GPT-Coding
 Used to re-create DS-3850 python coding projects using AI (ChatGPT 3.5)
 
@@ -54,3 +55,6 @@ def run_quiz():
 
 if __name__ == "__main__":
     run_quiz()
+=======
+
+>>>>>>> d9b73b2a510b58875bb5321170c7eaa1f1d6cd56
